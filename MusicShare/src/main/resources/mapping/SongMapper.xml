@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.dao.SongDao">
+    <select id="getSongListForIndexPage" resultType="Song">
+        SELECT  * from song ORDER  BY  status_date DESC limit 8
+    </select>
+
+    <select id="getSongBySongid" parameterType="String" resultType="Song">
+        select * from song
+        <where>
+            songid=#{songid}
+        </where>
+    </select>
+
+    <select id="getSongsBySingerid" parameterType="String" resultType="Song">
+        SELECT  * from song
+        <where>
+            singerid=#{singerid}
+        </where>
+         limit 17
+    </select>
+
+    <update id="addClickTime" parameterType="Song" >
+        update song set clicktime=#{clicktime} where songid=#{songid}
+    </update>
+
+    <update id="addDownloadTime" parameterType="Song" >
+        update song set downloadtime=#{downloadtime} where songid=#{songid}
+    </update>
+
+    <select id="searchsongs" parameterType="String" resultType="Song">
+        select * from song
+        <where>
+            name LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+        </where>
+    </select>
+
+    <insert id="addSong" parameterType="Song">
+        insert into song (songid,name,mp3url,songpicurl,status,status_date,clicktime,downloadtime,singerid,userid,musicscore) values(#{songid},#{name},#{mp3url},#{songpicurl},#{status},#{status_date},#{clicktime},#{downloadtime},#{singerid},#{userid},#{musicscore})
+    </insert>
+
+</mapper>

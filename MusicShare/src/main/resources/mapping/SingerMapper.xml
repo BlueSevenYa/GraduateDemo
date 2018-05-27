@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.dao.SingerDao">
+
+    <!-- 根据id查询用户信息 -->
+    <select id="findSingerBySingerid" parameterType="String" resultType="Singer">
+        select * from singer
+        <where>
+            singerid=#{singerid}
+        </where>
+    </select>
+
+    <select id="findSingerBySingername" parameterType="String" resultType="Singer">
+        select * from singer
+        <where>
+            name=#{singername}
+        </where>
+    </select>
+
+    <select id="getSingersWithCodition" parameterType="Singer" resultType="Singer">
+        select * from singer
+        <where>
+            nationality=#{nationality} AND  sex=#{sex}
+        </where>
+    </select>
+
+    <insert id="addSinger" parameterType="Singer">
+        insert into singer (singerid,name,nationality,status,status_date,singerpicurl,sex) values(#{singerid},#{name},#{nationality},#{status},#{status_date},#{singerpicurl},#{sex})
+    </insert>
+</mapper>

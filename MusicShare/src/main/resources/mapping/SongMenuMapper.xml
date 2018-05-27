@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.dao.SongMenuDao">
+    <select id="getSongMenuList" resultType="SongMenu">
+        SELECT  * from songmenu ORDER BY clicktime DESC limit 10
+    </select>
+
+    <select id="getSongMenuAll" resultType="IndexSongMenuVo">
+        SELECT u.userid,u.nickname,u.username,s.name,s.smpicurl,s.songmenuid,s.clicktime from user u,songmenu s where s.userid=u.userid
+    </select>
+
+    <select id="getSongListBySmid" parameterType="String" resultType="String">
+        select songid from menusong
+        <where>
+            songmenuid=#{songmenuid}
+        </where>
+    </select>
+
+    <select id="getSongMenuBySongmenuid" parameterType="String" resultType="SongMenu">
+        select * from songmenu
+        <where>
+            songmenuid=#{songmenuid}
+        </where>
+    </select>
+
+    <select id="getSongMenusByUserid" parameterType="String" resultType="SongMenu">
+        select * from songmenu
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+
+    <select id="getSongMenusByUseridAndStatus" parameterType="String" resultType="SongMenu">
+        select * from songmenu
+        <where>
+            userid=#{userid} and status='open'
+        </where>
+    </select>
+
+
+    <select id="getSongMenuOfSongsCountBySongMenuid" parameterType="String" resultType="Integer" >
+        select count(*) from menusong
+        <where>
+            songmenuid=#{songmenuid}
+        </where>
+    </select>
+
+
+
+    <update id="updateSongmenu" parameterType="SongMenu" >
+        update songmenu set name=#{name},describle=#{describle} where songmenuid=#{songmenuid}
+    </update>
+
+
+    <update id="deleteSongMenu" parameterType="SongMenu" >
+        update songmenu set status=#{status} where songmenuid=#{songmenuid}
+    </update>
+
+    <insert id="addSongMenu" parameterType="SongMenu">
+        insert into songmenu (songmenuid,status,status_date,create_date,userId,smpicurl,name,clicktime) values(#{songmenuid},#{status},#{status_date},#{create_date},#{userId},#{smpicurl},#{name},#{clicktime})
+    </insert>
+
+    <update id="updateSongMenuPic" parameterType="SongMenu" >
+        update songmenu set smpicurl=#{smpicurl} where songmenuid=#{songmenuid}
+    </update>
+
+    <update id="addClickTime" parameterType="SongMenu" >
+        update songmenu set clicktime=#{clicktime} where songmenuid=#{songmenuid}
+    </update>
+
+</mapper>

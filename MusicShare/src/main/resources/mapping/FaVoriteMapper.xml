@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.dao.FavoriteDao">
+
+
+    <select id="getSongidsByUserid" parameterType="String" resultType="String">
+        select songid from favorite
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+
+    <select id="getFavsCountByUserid" parameterType="String" resultType="Integer" >
+        select count(*) from favorite
+        <where>
+        userid=#{userid}
+    </where>
+    </select>
+
+    <select id="getFavorite" parameterType="Favorite" resultType="Favorite">
+        select * from favorite
+        <where>
+            userid=#{userid} and songid=#{songid}
+        </where>
+    </select>
+
+    <insert id="addFavorite" parameterType="Favorite">
+        insert into favorite (userid,songid) values(#{userid},#{songid})
+    </insert>
+
+
+</mapper>

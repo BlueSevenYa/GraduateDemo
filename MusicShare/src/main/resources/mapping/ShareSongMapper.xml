@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.dao.ShareSongDao">
+
+
+
+    <select id="getShareSongListByUserid" parameterType="String" resultType="ShareSong">
+        select * from sharesong
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+
+    <select id="getShareSongids" parameterType="ShareSong" resultType="String">
+        select songid from sharesong
+        <where>
+            userid=#{userid} and isyuanchuang=#{isyuanchuang}
+        </where>
+    </select>
+
+    <insert id="addShareSong" parameterType="ShareSong">
+        insert into sharesong (userid,songid,upload_date,score,isyuanchuang) values(#{userid},#{songid},#{upload_date},#{score},#{isyuanchuang})
+    </insert>
+
+</mapper>

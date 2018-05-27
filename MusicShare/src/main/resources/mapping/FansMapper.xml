@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.dao.FansDao">
+
+    <select id="getFansBySingerid" parameterType="String" resultType="Fans">
+        select * from fans
+        <where>
+            singerid=#{singerid}
+        </where>
+    </select>
+
+    <insert id="addFans" parameterType="Fans">
+        insert into fans (singerid,userid,content) values(#{singerid},#{userid},#{content})
+    </insert>
+
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.dao.RankingDao">
+    <select id="showRankingClick" resultType="Song">
+        SELECT  * from song ORDER BY clicktime DESC limit 100
+    </select>
+
+    <select id="showRankingDownload" resultType="Song">
+        SELECT  * from song ORDER BY downloadtime DESC limit 100
+    </select>
+
+</mapper>

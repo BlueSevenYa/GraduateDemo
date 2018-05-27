@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.dao.UserDao">
+
+    <select id="userLogin" resultType="User" parameterType="User">
+        SELECT  * from user where username=#{username} and password=#{password}
+    </select>
+
+    <!-- 根据id查询用户信息 -->
+    <select id="findUserByUserid" parameterType="String" resultType="User">
+        select * from user
+        <where>
+            userid=#{userid}
+        </where>
+    </select>
+    <!--根据username查询是否重复-->
+    <select id="validateRepeat" parameterType="String" resultType="User">
+        select * from user
+        <where>
+            username=#{username}
+        </where>
+    </select>
+
+
+    <insert id="userRegister" parameterType="map">
+        insert into USER (userid,username,password,userscore,userpicurl) values(#{userid},#{username},#{password},#{userscore},#{userpicurl})
+    </insert>
+
+    <update id="userUpdate" parameterType="User" >
+        update user set nickname=#{nickname},sex=#{sex},describle=#{describle},place=#{place},birthday=#{birthday} where userid=#{userid}
+    </update>
+
+    <update id="updateUserHeadPic" parameterType="User" >
+        update user set userpicurl=#{userpicurl} where userid=#{userid}
+    </update>
+
+    <update id="updateUserScore" parameterType="User" >
+        update user set userscore=#{userscore} where userid=#{userid}
+    </update>
+
+</mapper>

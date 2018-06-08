@@ -151,7 +151,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     dataType:"json",
                     data: params,
                     success:function (data) {
-                        if(data.success==='success'){
+                        console.log(data.successCode);
+                        if(data.successCode==1){
                             swal("分享成功");
                         }
                     }
